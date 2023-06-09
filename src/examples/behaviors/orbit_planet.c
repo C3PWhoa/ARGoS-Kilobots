@@ -1,8 +1,11 @@
 #include <kilolib.h>
+//include lib for classics functions
+#include <stdlib.h>
+#include <stdio.h>
 
 // Constants for orbit control.
-#define TOO_CLOSE_DISTANCE 40
-#define DESIRED_DISTANCE 60
+#define TOO_CLOSE_DISTANCE 60
+#define DESIRED_DISTANCE 70
 
 // Constants for motion handling function.
 #define STOP 0
@@ -60,6 +63,7 @@ void loop()
       {
          set_color(RGB(0, 1, 0));
          set_motion(FORWARD);
+          printf("TOO_CLOSE : d = %d\n", distance);
       }
       // If not too close, turn left or right depending on distance,
       // to maintain orbit.
@@ -69,11 +73,13 @@ void loop()
          {
             set_color(RGB(1, 0, 0));
             set_motion(LEFT);
+             printf("d < DESIRED : d =%d\n", distance);
          }
          else
          {
             set_color(RGB(0, 0, 1));
             set_motion(RIGHT);
+             printf("d>=DESIRED : d = %d\n", distance);
          }
       }
    }

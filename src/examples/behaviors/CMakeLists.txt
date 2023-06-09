@@ -74,7 +74,29 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   target_link_libraries(test_debug argos3plugin_simulator_kilolib)
 
   #
-  # Lab 1 : Shape
+  # Lab 1 : Distance
+  #
+  add_executable(distance distance.c)
+  target_link_libraries(distance argos3plugin_simulator_kilolib)
+
+  #
+  # Lab 2 : Orbit with 3 stars
+  #
+  add_executable(orbit_star_2 orbit_star_2.c)
+  target_link_libraries(orbit_star_2 argos3plugin_simulator_kilolib)
+  add_executable(orbit_planet_2 orbit_planet_2.c)
+  target_link_libraries(orbit_planet_2 argos3plugin_simulator_kilolib)
+
+  #
+  # Lab 3 : Orbit with 3 stars and stop between 1 & 2
+  #
+  add_executable(stop_orbit_planet stop_orbit_planet.c)
+  target_link_libraries(stop_orbit_planet argos3plugin_simulator_kilolib)
+  add_executable(stop_orbit_star stop_orbit_star.c)
+  target_link_libraries(stop_orbit_star argos3plugin_simulator_kilolib)
+
+  #
+  # Lab 4 : Shape
   #
   add_executable(shape shape.c)
   target_link_libraries(shape argos3plugin_simulator_kilolib)

@@ -69,7 +69,7 @@ namespace argos {
          m_pcLightSensorEquippedEntity = new CLightSensorEquippedEntity(this, "light_0");
          AddComponent(*m_pcLightSensorEquippedEntity);
          m_pcLightSensorEquippedEntity->AddSensor(KILOBOT_LIGHT_SENSOR_OFFSET,
-                                                  CVector3(0.0f, 0.0f, 1.0f),
+                                                  CVector3(KILOBOT_HALF_INTERPIN_DISTANCE, KILOBOT_HALF_INTERPIN_DISTANCE, 1.0f),
                                                   KILOBOT_LIGHT_SENSOR_RANGE,
                                                   cLightAnchor);
          /* Kilobot communication entity */
@@ -114,7 +114,10 @@ namespace argos {
          m_pcEmbodiedEntity->Init(GetNode(t_tree, "body"));
          /* Create an anchor for the light sensor - must be done after initializing the body */
          SAnchor& cLightAnchor = m_pcEmbodiedEntity->AddAnchor("light", KILOBOT_LIGHT_SENSOR_OFFSET);
-         SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.0, 0.0, KILOBOT_RAB_ELEVATION));
+
+         /*Modification of variable X in the 3D vector to center the "communication" entity. The Kilobots will calculate
+          * their center-to-center distances. */
+         SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.01, 0.0, KILOBOT_RAB_ELEVATION));
          /* Wheeled entity and wheel positions (left, right) */
          m_pcWheeledEntity = new CWheeledEntity(this, "wheels_0", 2);
          AddComponent(*m_pcWheeledEntity);
