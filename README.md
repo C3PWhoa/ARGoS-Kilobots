@@ -72,6 +72,11 @@ argos3 -c src/examples/experiments/kilobot_sync.argos
 argos3 -c src/examples/experiments/kilobot_orbit_2.argos
 ```
 
+## Lab 9
+```shell
+argos3 -c src/examples/experiments/stop_orbit.argos
+```
+
 # Differences between Kilombo and ARGoS
 
 ## Kilombo
@@ -98,17 +103,27 @@ argos3 -c src/examples/experiments/kilobot_orbit_2.argos
     * Communication considers obstruction
     * Message drop considers local density
    
-   # New labs designed to understand a method of shape formation
+# New labs designed to understand a method of shape formation
    f. Turchet. As part of a swarm robotics course
 
-   For the proper functioning of these labs, the position of the 'comm' entity has been modified in the file kilobot_entity.cpp. 
+   For the proper functioning of these labs, the position of the 'comm' entity has been modified in the file kilobot_entity.cpp. You may be required to make the modification to the original file yourself.
 
    SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.01, 0.0, KILOBOT_RAB_ELEVATION));
 
-   ## Lab 8 : kilobot_orbit_2
+  ## Lab 8 : kilobot_orbit_2
      * Goal: to orbit one kilobot around three stationary kilobots.
        * Concept of minimum distance.
        * 3 states : 
          * ORBIT_TOOCLOSE
          * ORBIT_FORWARD
          * ORBIT_NORMAL
+
+  ## Lab 9 : stop_orbit
+     * Goal: Stop a robot when it reaches the desired relative position.
+       * Concept of minimum distance.
+       * Declaration of a distance array
+       * 4 states : 
+         * ORBIT_TOOCLOSE
+         * ORBIT_FORWARD
+         * ORBIT_NORMAL
+         * ORBIT_STOP
