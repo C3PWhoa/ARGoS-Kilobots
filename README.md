@@ -97,3 +97,14 @@ argos3 -c src/examples/experiments/kilobot_orbit_2.argos
       * Robots can push other objects
     * Communication considers obstruction
     * Message drop considers local density
+   
+   # New labs designed to understand a method of shape formation
+   f. Turchet. As part of a swarm robotics course
+
+   ## Lab 8 : kilobot_orbit_2
+     * Goal: to orbit one kilobot around three stationary kilobots.
+       * Concept of minimum distance.
+       * 3 states : 
+         * ORBIT_TOOCLOSE
+         * ORBIT_FORWARD
+         * ORBIT_NORMAL
