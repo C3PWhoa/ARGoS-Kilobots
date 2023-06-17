@@ -67,6 +67,11 @@ argos3 -c src/examples/experiments/kilobot_gradient_simple.argos
 argos3 -c src/examples/experiments/kilobot_sync.argos
 ```
 
+## Lab 8
+```shell
+argos3 -c src/examples/experiments/kilobot_orbit_2.argos
+```
+
 # Differences between Kilombo and ARGoS
 
 ## Kilombo
