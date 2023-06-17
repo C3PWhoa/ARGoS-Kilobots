@@ -74,13 +74,13 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   target_link_libraries(test_debug argos3plugin_simulator_kilolib)
 
   #
-  # Lab 1 : Distance
+  # Lab 0 : Distance
   #
   add_executable(distance distance.c)
   target_link_libraries(distance argos3plugin_simulator_kilolib)
 
   #
-  # Lab 2 : Orbit with 3 stars
+  # Lab 8 : Orbit with 3 stars
   #
   add_executable(orbit_star_2 orbit_star_2.c)
   target_link_libraries(orbit_star_2 argos3plugin_simulator_kilolib)
@@ -88,7 +88,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   target_link_libraries(orbit_planet_2 argos3plugin_simulator_kilolib)
 
   #
-  # Lab 3 : Orbit with 3 stars and stop between 1 & 2
+  # Lab 9 : Orbit with 3 stars and stop between 1 & 2
   #
   add_executable(stop_orbit_planet stop_orbit_planet.c)
   target_link_libraries(stop_orbit_planet argos3plugin_simulator_kilolib)
@@ -96,7 +96,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   target_link_libraries(stop_orbit_star argos3plugin_simulator_kilolib)
 
   #
-  # Lab 4 : Orbit with 3 stars and 4 planets
+  # Lab 10 : Orbit with 3 stars and 4 planets
   #
   add_executable(multi_orbit_planet multi_orbit_planet.c)
   target_link_libraries(multi_orbit_planet argos3plugin_simulator_kilolib)
@@ -104,10 +104,18 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   target_link_libraries(multi_orbit_star argos3plugin_simulator_kilolib)
 
   #
-  # Lab 5 : Shape
+  # Lab 11 : Shape
   #
   add_executable(shape shape.c)
   target_link_libraries(shape argos3plugin_simulator_kilolib)
   add_executable(shape_star shape_star.c)
   target_link_libraries(shape_star argos3plugin_simulator_kilolib)
+
+  #
+  # Lab 12 : Phototaxis
+  #
+  add_executable(phototaxis phototaxis.c)
+  target_link_libraries(phototaxis argos3plugin_simulator_kilolib)
+  add_executable(phototaxis_star phototaxis_star.c)
+  target_link_libraries(phototaxis_star argos3plugin_simulator_kilolib)
 endif(ARGOS_BUILD_FOR_SIMULATOR)
