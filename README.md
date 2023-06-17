@@ -82,6 +82,11 @@ argos3 -c src/examples/experiments/stop_orbit.argos
 argos3 -c src/examples/experiments/kilobot_multi_orbit.argos
 ```
 
+## Lab 11
+```shell
+argos3 -c src/examples/experiments/shape.argos
+```
+
 # Differences between Kilombo and ARGoS
 
 ## Kilombo
@@ -138,6 +143,18 @@ argos3 -c src/examples/experiments/kilobot_multi_orbit.argos
      * Goal: Stop 3 robots when it reaches the desired relative position.
        * Concept of minimum distance.
        * Declaration of a distance array
+       * 4 states : 
+         * ORBIT_TOOCLOSE
+         * ORBIT_FORWARD
+         * ORBIT_NORMAL
+         * ORBIT_STOP
+
+   ## Lab 11 : shape 
+     * Goal: Stop 3 robots when it reaches the desired relative position With the assignment of a new identifier. 
+     * The arrival order of the robots is no longer relevant. See the XML file.
+       * Concept of minimum distance.
+       * Declaration of a distance array
+       * Assignment of a new identifier.
        * 4 states : 
          * ORBIT_TOOCLOSE
          * ORBIT_FORWARD
