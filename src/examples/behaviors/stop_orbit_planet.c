@@ -1,5 +1,7 @@
 //
 // Created by frederic turchet on 09/06/2023.
+// Description : 3 robots stationnaires, un robot en mouvement qui va s'arrêter à l'emplacement défini dans form[][].
+// Utilisation de l'identifiant par défaut.
 // Le robot en mouvement va orbiter et s'arrêtera à distances définies avec 2 de ses voisins
 // Conditions : Le robot planète doit être assez proche et correctement orienté pour commencer l'orbit normal
 //
@@ -43,9 +45,9 @@ int range_dist[NB_BOT];
  */
 int form[NB_BOT][4] = {
         {1, 70, 2, 70},
-        {0,70, 2, 99},
+        {0, 70, 2, 99},
         {0, 70, 1, 99},
-        {1,70, 2, 70}
+        {1, 70, 2, 70}
 };
 
 /**
@@ -65,36 +67,27 @@ int min_received_dist(int tab_dist[], int nb_bot) {
 }
 
 // Function to handle motion.
-void set_motion(int new_motion)
-{
+void set_motion(int new_motion) {
     // Only take an action if the motion is being changed.
-    if (current_motion != new_motion)
-    {
+    if (current_motion != new_motion) {
         current_motion = new_motion;
 
-        if (current_motion == STOP)
-        {
+        if (current_motion == STOP) {
             set_motors(0, 0);
-        }
-        else if (current_motion == FORWARD)
-        {
+        } else if (current_motion == FORWARD) {
             spinup_motors();
             set_motors(kilo_straight_left, kilo_straight_right);
-        }
-        else if (current_motion == LEFT)
-        {
+        } else if (current_motion == LEFT) {
             spinup_motors();
             set_motors(kilo_turn_left, 0);
-        }
-        else if (current_motion == RIGHT)
-        {
+        } else if (current_motion == RIGHT) {
             spinup_motors();
             set_motors(0, kilo_turn_right);
         }
     }
 }
 
-void setup(){
+void setup() {
 
     // L'état des 3 robots stationnaires = ORBIT_STOP
     for (int i = 0; i < 3; ++i) {
@@ -122,16 +115,16 @@ void setup(){
  * Sinon, il fera des déplacement alternés gauche droite pour garder son orbit.
  * Si il arrive à distance définie des ses voisins, il s'arrête.
  */
-void orbit_normal(){
+void orbit_normal() {
     printf("%d est dans normal()\n", kilo_uid);
     int min = min_received_dist(range_dist, NB_BOT);
     printf("min = %d\n", min);
-    if (min < TOO_CLOSE_DISTANCE){
+    if (min < TOO_CLOSE_DISTANCE) {
         printf("NORMAL : min < TOO_CLOSE_DISTANCE\n");
         states[kilo_uid] = ORBIT_TOOCLOSE;
         printf("states[%d]= %d\n", kilo_uid, states[kilo_uid]);
     } else {
-        if (min < DESIRED_DISTANCE){
+        if (min < DESIRED_DISTANCE) {
             printf("min < DESIRED - LEFT\n");
             set_motion(LEFT);
         } else {
@@ -142,41 +135,41 @@ void orbit_normal(){
 
     printf("je sors de la condition\n");
     if (range_dist[form[kilo_uid][0]] >= (form[kilo_uid][1] - THRESHOLD) &&
-            range_dist[form[kilo_uid][0]] <= (form[kilo_uid][1] + THRESHOLD) &&
-            range_dist[form[kilo_uid][2]] >= (form[kilo_uid][3] - THRESHOLD) &&
-            range_dist[form[kilo_uid][0]] <= (form[kilo_uid][3] + THRESHOLD)){
+        range_dist[form[kilo_uid][0]] <= (form[kilo_uid][1] + THRESHOLD) &&
+        range_dist[form[kilo_uid][2]] >= (form[kilo_uid][3] - THRESHOLD) &&
+        range_dist[form[kilo_uid][0]] <= (form[kilo_uid][3] + THRESHOLD)) {
         states[kilo_uid] = ORBIT_STOP;
     }
 }
 
-void orbit_tooClose(){
+void orbit_tooClose() {
     printf("%d est dans tooclose()\n", kilo_uid);
     int min = min_received_dist(range_dist, NB_BOT);
-    if (min < TOO_CLOSE_DISTANCE){
+    if (min < TOO_CLOSE_DISTANCE) {
         set_motion(FORWARD);
     } else {
         states[kilo_uid] = ORBIT_NORMAL;
     }
 }
 
-void orbit_forward(){
+void orbit_forward() {
     printf("%d est dans forward()\n", kilo_uid);
     int min = min_received_dist(range_dist, NB_BOT);
 
-    if (min > DESIRED_DISTANCE){
+    if (min > DESIRED_DISTANCE) {
         set_motion(FORWARD);
     } else {
         states[kilo_uid] = ORBIT_NORMAL;
     }
 }
 
-void orbit_stop(){
+void orbit_stop() {
     set_motion(STOP);
 }
 
 
-void loop(){
-    if (message_sent == 1){
+void loop() {
+    if (message_sent == 1) {
         message_sent = 0;
     }
 
@@ -207,26 +200,27 @@ void loop(){
     }
 }
 
-void message_rx(message_t *m, distance_measurement_t *d){
+void message_rx(message_t *m, distance_measurement_t *d) {
     new_message = 1;
     speaker_id = (*m).data[0];
     received_state = (*m).data[1];
-    if(received_state == ORBIT_STOP){
+    if (received_state == ORBIT_STOP) {
         range_dist[speaker_id] = estimate_distance(d);
     }
-    printf("%d a reçu un message de %d : d = %d - received_state = %d\n", kilo_uid, speaker_id, range_dist[speaker_id], states[speaker_id]);
+    printf("%d a reçu un message de %d : d = %d - received_state = %d\n", kilo_uid, speaker_id, range_dist[speaker_id],
+           states[speaker_id]);
 
 }
 
-message_t *message_tx(){
+message_t *message_tx() {
     return &message;
 }
 
-void message_tx_success(){
+void message_tx_success() {
     message_sent = 1;
 }
 
-int main(){
+int main() {
     kilo_init();
     kilo_message_tx = message_tx;
     kilo_message_tx_success = message_tx_success;

@@ -96,7 +96,15 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   target_link_libraries(stop_orbit_star argos3plugin_simulator_kilolib)
 
   #
-  # Lab 4 : Shape
+  # Lab 4 : Orbit with 3 stars and 4 planets
+  #
+  add_executable(multi_orbit_planet multi_orbit_planet.c)
+  target_link_libraries(multi_orbit_planet argos3plugin_simulator_kilolib)
+  add_executable(multi_orbit_star multi_orbit_star.c)
+  target_link_libraries(multi_orbit_star argos3plugin_simulator_kilolib)
+
+  #
+  # Lab 5 : Shape
   #
   add_executable(shape shape.c)
   target_link_libraries(shape argos3plugin_simulator_kilolib)

@@ -62,9 +62,6 @@ void loop()
 
 void message_rx(message_t *m, distance_measurement_t *d){
     new_message = 1;
-    speaker_id = (*m).data[0];
-    received_state = (*m).data[1];
-    range_dist[speaker_id] = estimate_distance(d);
 }
 
 message_t *message_tx()
