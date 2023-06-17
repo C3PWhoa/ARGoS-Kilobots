@@ -24,7 +24,6 @@ typedef enum {
     ORBIT_NORMAL,
     ORBIT_FORWARD,
     ORBIT_STOP,
-    RANDOM_WALK,
 } orbit_state_t;
 
 message_t message;
@@ -90,20 +89,12 @@ void setup() {
         range_dist[i] = 200;
     }
 
-
-
     message.type = NORMAL;
     message.data[0] = kilo_uid;
     message.data[1] = states[kilo_uid];
     message.data[2] = new_id[kilo_uid];
     message.crc = message_crc(&message);
 
-    printf("__________________SETUP________________________\n");
-    printf("kilo_uid = %d\n", kilo_uid);
-    printf("states[%d] = %d\n", kilo_uid, states[kilo_uid]);
-    printf("new_id[%d] = %d\n", kilo_uid, new_id[0]);
-    printf("send message : kilo_uid: %d, states: %d, new_id: %d\n", kilo_uid, states[kilo_uid], new_id[kilo_uid]);
-    printf("****>>> nb de robot dans la forme : %d\n", nb_bot_form);
 }
 
 int min_received_dist(int tab_dist[], int nb_bot) {
@@ -116,22 +107,9 @@ int min_received_dist(int tab_dist[], int nb_bot) {
     return return_min;
 }
 
-int nb_bot_in_form(int tabStates[], int nb_bot){
-    int nbBot = 0;
-    for (int i = 0; i < nb_bot; ++i) {
-        if (tabStates[i] == ORBIT_STOP){
-            nbBot++;
-        }
-    }
-    return nbBot;
-}
-
 void orbit_normal() {
-    printf("_________________NORMAL____________________\n");
-    printf("-> %d est dans NORMAL\n", kilo_uid);
 
     int min = min_received_dist(range_dist, NB_BOT);
-    printf("min = %d\n", min);
 
     if (min < TOOCLOSE_DISTANCE) {
         states[kilo_uid] = ORBIT_TOOCLOSE;
@@ -147,18 +125,15 @@ void orbit_normal() {
         range_dist[forme[new_id[kilo_uid]][0]] <= (forme[new_id[kilo_uid]][1] + THRESHOLD) &&
         range_dist[forme[new_id[kilo_uid]][2]] >= (forme[new_id[kilo_uid]][3] - THRESHOLD) &&
         range_dist[forme[new_id[kilo_uid]][2]] <= (forme[new_id[kilo_uid]][3] + THRESHOLD)) {
-        printf("***********NORMAL****************\n");
+
         states[kilo_uid] = ORBIT_STOP;
     }
 
 }
 
 void orbit_tooclose() {
-    printf("________________TOOCLOSE_______________\n");
-    printf("-> %d est dans TOOCLOSE\n", kilo_uid);
 
     int min = min_received_dist(range_dist, NB_BOT);
-    printf("min tooclose= %d\n", min);
 
     if (min >= DESIRED_DISTANCE) {
         states[kilo_uid] = ORBIT_NORMAL;
@@ -174,8 +149,6 @@ void orbit_tooclose() {
 }
 
 void orbit_forward() {
-    printf("_______________FORWARD___________________\n");
-    printf("-> %d est dans FORWARD\n", kilo_uid);
 
     int min = min_received_dist(range_dist, NB_BOT);
     if (received_state == ORBIT_STOP && min < DESIRED_DISTANCE) {
@@ -190,15 +163,9 @@ void orbit_forward() {
 }
 
 void orbit_stop() {
-    printf("__________STOP_____________________\n");
-    printf("-> %d est dans STOP\n", kilo_uid);
     set_motion(STOP);
 
     int nbBotInForm = 0;
-
-    printf("bot_in_form[%d] = %d\n", kilo_uid-1, bot_in_form[kilo_uid]);
-
-    printf("****>>> nb de robot dans la forme : %d\n", nb_bot_in_form(states, NB_BOT));
 
     message.type = NORMAL;
     message.data[0] = kilo_uid;
@@ -208,48 +175,8 @@ void orbit_stop() {
 
 }
 
-void random_walk() {
-    printf("__________RANDOM_____________________\n");
-    printf("-> %d est dans RANDOM_WALK\n", kilo_uid);
-    printf("received state = %d\n", received_state);
-    int min = min_received_dist(range_dist, NB_BOT);
-
-    // Si le robot reçoit un message d'un robot stationnaire alors il change d'état -> NORMAL
-    // Sinon, il se déplace dans une direction aléatoire pendant 250 ticks
-    if (received_state == ORBIT_STOP && min < DESIRED_DISTANCE) {
-        states[kilo_uid] = ORBIT_NORMAL;
-    } else {
-        if (kilo_ticks > last_ticks_update + 1000) {
-            last_ticks_update = kilo_ticks;
-
-            int rand_number = rand_hard();
-            int rand_direction = (rand_number % 4);
-            if (rand_direction == 0 || rand_direction == 1) {
-                set_motion(FORWARD);
-                printf("random forward\n");
-            } else if (rand_direction == 2) {
-                set_motion(RIGHT);
-                printf("random right\n");
-            } else {
-                set_motion(LEFT);
-                printf("random left\n");
-            }
-        }
-    }
-
-
-
-//        message.type = NORMAL;
-//        message.data[0] = kilo_uid;
-//        message.data[1] = states[kilo_uid];
-//        message.data[2] = new_id[kilo_uid];
-//        message.crc = message_crc(&message);
-
-}
-
 void loop() {
 
-    printf("%d est dans la loop et son état = %d\n", kilo_uid, states[kilo_uid]);
     if (message_sent == 1) {
         message_sent = 0;
 
@@ -274,9 +201,6 @@ void loop() {
             case ORBIT_STOP:
                 orbit_stop();
                 break;
-            case RANDOM_WALK:
-                random_walk();
-                break;
             default:
                 break;
         }
@@ -286,7 +210,6 @@ void loop() {
 }
 
 void message_rx(message_t *m, distance_measurement_t *d) {
-    printf("______________message_rx_________________\n");
 
     new_message = 1;
     set_color(RGB(1, 0, 0));
@@ -295,19 +218,11 @@ void message_rx(message_t *m, distance_measurement_t *d) {
     received_newID = (*m).data[2];
     if (received_state == ORBIT_STOP) {
         range_dist[received_newID] = estimate_distance(d);
-        //if (kilo_uid == 4) {
-        printf("%d a reçu un message de %d. state=%d, new_id= %d, range_dist[%d] = %d.\n", kilo_uid, speaker_id,
-               received_state, received_newID, speaker_id, range_dist[received_newID]);
-        printf("son nouvel id est %d\n", new_id[kilo_uid]);
-        //}
-
     }
 }
 
 
 message_t *message_tx() {
-    printf("%d a envoyé un message\n", kilo_uid);
-    printf("son état: %d\n", states[kilo_uid]);
     return &message;
 }
 
