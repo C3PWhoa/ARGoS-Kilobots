@@ -101,6 +101,10 @@ argos3 -c src/examples/experiments/kilobot_orbit_2.argos
    # New labs designed to understand a method of shape formation
    f. Turchet. As part of a swarm robotics course
 
+   For the proper functioning of these labs, the position of the 'comm' entity has been modified in the file kilobot_entity.cpp. 
+
+   SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.01, 0.0, KILOBOT_RAB_ELEVATION));
+
    ## Lab 8 : kilobot_orbit_2
      * Goal: to orbit one kilobot around three stationary kilobots.
        * Concept of minimum distance.
