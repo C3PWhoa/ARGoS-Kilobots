@@ -43,15 +43,15 @@ int bot_in_form[NB_BOT] = {0,0,0,0,0,0,0};
 orbit_state_t state = ORBIT_FORWARD;
 orbit_state_t states[NB_BOT];
 
-//[new_id]:{n1, d1, n2, d2, new_id} where 0 < ni < N_BOT and 'd' equal's distance between kilo_uid and ni
-int forme[NB_BOT][5] = {
-        {1, 65, 2, 65, 0},
-        {0, 65, 2, 92, 1},
-        {0, 65, 1, 92, 2},
-        {1, 65, 2, 65, 3},
-        {2, 65, 3, 92, 4},
-        {3, 65, 4, 65, 4},
-        {3, 65, 1, 92, 4}
+//[new_id]:{n1, d1, n2, d2} where 0 < ni < N_BOT and 'd' equal's distance between kilo_uid and ni
+int forme[NB_BOT][4] = {
+        {1, 65, 2, 65},
+        {0, 65, 2, 92},
+        {0, 65, 1, 92},
+        {1, 65, 2, 65},
+        {2, 65, 3, 92},
+        {3, 65, 4, 65},
+        {3, 65, 1, 92}
 };
 
 

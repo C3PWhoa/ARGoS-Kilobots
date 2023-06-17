@@ -95,32 +95,20 @@ void setup(){
 }
 
 
-
-void move_to_light(){
-
-}
-
 void orbit_normal(){
-    printf("%d est dans normal()\n", kilo_uid);
     int min = min_received_dist(range_dist, NB_BOT);
-    printf("min = %d\n", min);
     if (min < TOO_CLOSE_DISTANCE){
-        printf("NORMAL : min < TOO_CLOSE_DISTANCE\n");
         states[kilo_uid] = ORBIT_TOOCLOSE;
-        printf("states[%d]= %d\n", kilo_uid, states[kilo_uid]);
     } else {
         if (min < DESIRED_DISTANCE){
-            printf("min < DESIRED - LEFT\n");
             set_motion(LEFT);
         } else {
-            printf("min > DESIRED - RIGHT\n");
             set_motion(RIGHT);
         }
     }
 }
 
 void orbit_tooClose(){
-    printf("%d est dans tooclose()\n", kilo_uid);
     int min = min_received_dist(range_dist, NB_BOT);
     if (min < TOO_CLOSE_DISTANCE){
         set_motion(FORWARD);
@@ -130,7 +118,6 @@ void orbit_tooClose(){
 }
 
 void orbit_forward(){
-    printf("%d est dans forward()\n", kilo_uid);
     int min = min_received_dist(range_dist, NB_BOT);
 
     if (min > DESIRED_DISTANCE){
@@ -148,11 +135,6 @@ void loop(){
 
     if (new_message == 1) {
         new_message = 0;
-        printf("LOOP : %d a reçu un message et son etat = %d\n", kilo_uid, states[kilo_uid]);
-
-        for (int i = 0; i < NB_BOT; ++i) {
-            printf("range_dist[%d] = %d\n", i, range_dist[i]);
-        }
 
         switch (states[kilo_uid]) {
             case ORBIT_TOOCLOSE:
@@ -177,8 +159,6 @@ void message_rx(message_t *m, distance_measurement_t *d){
     if(received_state == ORBIT_STOP){
         range_dist[speaker_id] = estimate_distance(d);
     }
-    printf("%d a reçu un message de %d : d = %d - received_state = %d\n", kilo_uid, speaker_id, range_dist[speaker_id], states[speaker_id]);
-
 }
 
 message_t *message_tx(){
