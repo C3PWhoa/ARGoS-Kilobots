@@ -7,6 +7,10 @@ C. Pinciroli, M.S. Talamali, A. Reina, J.A.R. Marshall and V.Trianni. Simulating
 
 In an educational setting, new labs have been created. Labs 0 to 7 are the examples presented by the authors to understand different concepts. Labs 8 to 14 are labs that present the process for designing collective behaviors to create a shape with a swarm of 54 kilobots.
 
+Out of respect for the authors' work, I leave the original texts intact, which you can find on the official repository https://github.com/ilpincy. They are not responsible for the additional labs and any potential errors they may contain.
+
+All the additional labs (8 to 14) are functional, but improvements can be made.
+
 # Compiling the code
 
 Make sure you have ARGoS >= 3.0.0-beta52 installed!
