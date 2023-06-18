@@ -136,8 +136,8 @@ argos3 -c src/examples/experiments/shape54.argos
 
    For the proper functioning of these labs (8 to 14), the position of the 'comm' entity has been modified in the file kilobot_entity.cpp. You may be required to make the modification to the original file yourself.
 
-   Orginal : SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.0, 0.0, KILOBOT_RAB_ELEVATION));
-   Modified : SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.01, 0.0, KILOBOT_RAB_ELEVATION));
+   * Orginal : SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.0, 0.0, KILOBOT_RAB_ELEVATION));
+   * Modified : SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.01, 0.0, KILOBOT_RAB_ELEVATION));
 
    This allows for centering the IR communication transmitter/receiver on the bodies of the robots.
 
