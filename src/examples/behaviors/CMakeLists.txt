@@ -118,4 +118,14 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   target_link_libraries(phototaxis argos3plugin_simulator_kilolib)
   add_executable(phototaxis_star phototaxis_star.c)
   target_link_libraries(phototaxis_star argos3plugin_simulator_kilolib)
+
+  #
+  # Lab 13 : big_form
+  #
+  add_executable(big_form big_form.c)
+  target_link_libraries(big_form argos3plugin_simulator_kilolib)
+  add_executable(big_form_star big_form_star.c)
+  target_link_libraries(big_form_star argos3plugin_simulator_kilolib)
+
+
 endif(ARGOS_BUILD_FOR_SIMULATOR)
