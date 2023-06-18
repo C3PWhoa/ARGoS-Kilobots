@@ -4,6 +4,9 @@ In scientific manuscripts that are based on simulations offered by this pluging,
 
 C. Pinciroli, M.S. Talamali, A. Reina, J.A.R. Marshall and V.Trianni. Simulating Kilobots within ARGoS: models and experimental validation. In _Proceedings of 11th International Conference on Swarm Intelligence (ANTS)_, LNCS 11172: 176-187, Springer, Cham, 2018. doi: [10.1007/978-3-030-00533-7_14](https://doi.org/10.1007/978-3-030-00533-7_14)
 
+
+In an educational setting, new labs have been created. Labs 0 to 7 are the examples presented by the authors to understand different concepts. Labs 8 to 14 are labs that present the process for designing collective behaviors to create a shape with a swarm of 54 kilobots.
+
 # Compiling the code
 
 Make sure you have ARGoS >= 3.0.0-beta52 installed!
@@ -129,11 +132,14 @@ argos3 -c src/examples/experiments/shape54.argos
     * Message drop considers local density
    
 # New labs designed to understand a method of shape formation
-   f. Turchet. As part of a swarm robotics course
+   F. Turchet. As part of a swarm robotics course
 
-   For the proper functioning of these labs, the position of the 'comm' entity has been modified in the file kilobot_entity.cpp. You may be required to make the modification to the original file yourself.
+   For the proper functioning of these labs (8 to 14), the position of the 'comm' entity has been modified in the file kilobot_entity.cpp. You may be required to make the modification to the original file yourself.
 
-   SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.01, 0.0, KILOBOT_RAB_ELEVATION));
+   Orginal : SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.0, 0.0, KILOBOT_RAB_ELEVATION));
+   Modified : SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.01, 0.0, KILOBOT_RAB_ELEVATION));
+
+   This allows for centering the IR communication transmitter/receiver on the bodies of the robots.
 
   ## Lab 8 : kilobot_orbit_2
      * Goal: to orbit one kilobot around three stationary kilobots.
