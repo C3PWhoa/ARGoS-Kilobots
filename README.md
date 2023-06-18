@@ -87,6 +87,11 @@ argos3 -c src/examples/experiments/kilobot_multi_orbit.argos
 argos3 -c src/examples/experiments/shape.argos
 ```
 
+## Lab 12
+```shell
+argos3 -c src/examples/experiments/phototaxis.argos
+```
+
 # Differences between Kilombo and ARGoS
 
 ## Kilombo
@@ -160,3 +165,17 @@ argos3 -c src/examples/experiments/shape.argos
          * ORBIT_FORWARD
          * ORBIT_NORMAL
          * ORBIT_STOP
+
+   ## Lab 12 : phototaxis 
+     * Goal: Stop 12 robots when it reaches the desired relative position With the assignment of a new identifier. 
+     * The arrival order of the robots is no longer relevant. See the XML file.
+     * The robots approach the origin of the shape through the phenomenon of phototaxis.
+       * Concept of minimum distance.
+       * Declaration of a distance array
+       * Assignment of a new identifier.
+       * 5 states : 
+         * ORBIT_TOOCLOSE
+         * ORBIT_FORWARD
+         * ORBIT_NORMAL
+         * ORBIT_STOP
+         * MOVE_TO_LIGHT
