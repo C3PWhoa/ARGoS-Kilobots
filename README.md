@@ -97,6 +97,11 @@ argos3 -c src/examples/experiments/phototaxis.argos
 argos3 -c src/examples/experiments/big_form.argos
 ```
 
+## Lab 14
+```shell
+argos3 -c src/examples/experiments/shape54.argos
+```
+
 # Differences between Kilombo and ARGoS
 
 ## Kilombo
@@ -194,6 +199,25 @@ argos3 -c src/examples/experiments/big_form.argos
        * Assignment of a new identifier.
        * Divides the group of robots into two to avoid congestion.
        * Simplification of the method for calculating the number of robots present in the shape. This avoids errors.
+       * 6 states : 
+         * ORBIT_TOOCLOSE
+         * ORBIT_FORWARD
+         * ORBIT_NORMAL
+         * ORBIT_STOP
+         * MOVE_TO_LIGHT
+         * WAIT_TOGO
+
+   ## Lab 14 : shape54 - 54 kilobots 
+     * Goal: Stop 54 robots when it reaches the desired relative position With the assignment of a new identifier. 
+     * The arrival order of the robots is no longer relevant.
+     * The robots approach the origin of the shape through the phenomenon of phototaxis.
+       * Concept of minimum distance.
+       * Declaration of a distance array
+       * Assignment of a new identifier.
+       * Divides the group of robots into 7 to avoid congestion.
+       * Each group starts within a predefined time interval in the 'wait_togo()' function.
+       * Simplification of the method for calculating the number of robots present in the shape. This avoids errors.
+       * The definition of the shape is important. The construction order must have a certain logic.
        * 6 states : 
          * ORBIT_TOOCLOSE
          * ORBIT_FORWARD
