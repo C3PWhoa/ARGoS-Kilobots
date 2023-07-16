@@ -342,7 +342,7 @@ void loop() {
     if (kilo_uid >2 && kilo_uid < 12 && received_one_mess == 0) {
         move_to_light();
     }
-
+    //printf("%d : il y a %d robots dasn la forme\n", kilo_uid,nb_bot_form);
     if (message_sent == 1) {
         message_sent = 0;
 

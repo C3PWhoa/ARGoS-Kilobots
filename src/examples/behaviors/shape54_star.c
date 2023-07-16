@@ -33,21 +33,14 @@ void setup() {
     message.data[1] = ORBIT_STOP;
     message.data[2] = new_id[kilo_uid];
     message.data[3] = nb_bot_form;
+    message.data[4] = bot_in_form[kilo_uid];
     message.crc = message_crc(&message);
 }
 
-int nb_bot_in_form() {
-    int nbBot = 0;
-    for (int i = 0; i < NB_BOT; ++i) {
-        if (bot_in_form[i] == 1) {
-            nbBot++;
-        }
-    }
-    return nbBot;
-}
 
 void loop() {
     // Blink LED magenta whenever a message is sent.
+    printf("%d : il y a %d robots dasn la forme\n", kilo_uid,nb_bot_form);
     if (message_sent == 1) {
         message_sent = 0;
 
@@ -59,7 +52,7 @@ void loop() {
         message.data[0] = kilo_uid;
         message.data[1] = ORBIT_STOP;
         message.data[2] = new_id[kilo_uid];
-        message.data[3] = nb_bot_in_form();
+        message.data[3] = nb_bot_form;
         message.data[4] = bot_in_form[kilo_uid];
         message.crc = message_crc(&message);
     }

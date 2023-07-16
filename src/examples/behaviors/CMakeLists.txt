@@ -136,4 +136,13 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   target_link_libraries(shape54_star argos3plugin_simulator_kilolib)
 
 
+  #
+  # Lab 15 : oneBotMove
+  #
+  add_executable(oneBotMove oneBotMove.c)
+  target_link_libraries(oneBotMove argos3plugin_simulator_kilolib)
+
+
+
+
 endif(ARGOS_BUILD_FOR_SIMULATOR)
