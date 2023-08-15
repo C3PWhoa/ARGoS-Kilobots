@@ -42,75 +42,20 @@ void setup() {
 
 }
 
-/**
- * If the robot approaches a stationary robot at a distance less than desired,
- * it enters the 'ORBIT_NORMAL' state. Otherwise, it moves straight ahead.
- */
-void orbit_forward() {
-    printf("%d forward\n", kilo_uid);
-    set_motion(LEFT);
-}
 
-/**
- * The robot is within the shape, it stops moving and transmits its message.
- */
-void orbit_stop() {
-    printf("%d stop\n", kilo_uid);
-    set_motion(STOP);
-
-}
 
 void loop() {
 
-    if (message_sent == 1) {
-        message_sent = 0;
-
-        set_color(RGB(0, 1, 1));
-        delay(100);
-        set_color(RGB(0, 0, 0));
-    }
-
-    if (new_message == 1) {
-
-        printf("new message == %d\n", new_message);
-        new_message = 0;
-
-        switch (current_motion) {
-            case STOP:
-                orbit_stop();
-                break;
-            case FORWARD:
-                orbit_forward();
-                break;
-            default:
-                break;
-        }
-
+    if (kilo_ticks <= 67){
+        set_motion(LEFT);
     }
 }
 
-void message_rx(message_t *m, distance_measurement_t *d) {
-
-    new_message = 1;
-    distance = estimate_distance(d);
-    current_motion = FORWARD;
-}
 
 
-message_t *message_tx() {
-    return &message;
-}
-
-void message_tx_success() {
-    // Set flag on message transmission.
-    message_sent = 1;
-}
 
 int main() {
     kilo_init();
-    kilo_message_tx = message_tx;
-    kilo_message_tx_success = message_tx_success;
-    kilo_message_rx = message_rx;
     kilo_start(setup, loop);
 
     return 0;

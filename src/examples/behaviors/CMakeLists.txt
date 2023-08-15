@@ -142,7 +142,43 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   add_executable(oneBotMove oneBotMove.c)
   target_link_libraries(oneBotMove argos3plugin_simulator_kilolib)
 
+  #
+  # Lab 16 : Collision
+  #
+  add_executable(shapeCollision shapeCollision.c)
+  target_link_libraries(shapeCollision argos3plugin_simulator_kilolib)
+  add_executable(shapeCollision_star shapeCollision_star.c)
+  target_link_libraries(shapeCollision_star argos3plugin_simulator_kilolib)
 
+  #
+  # Lab 17 : exp2 - id aléatoire
+  #
+  add_executable(exp2 exp2.c)
+  target_link_libraries(exp2 argos3plugin_simulator_kilolib)
+  add_executable(exp2_star exp2_star.c)
+  target_link_libraries(exp2_star argos3plugin_simulator_kilolib)
+
+  #
+  # Lab 18 : exp3 - collision
+  #
+  add_executable(exp3 exp3.c)
+  target_link_libraries(exp3 argos3plugin_simulator_kilolib)
+  add_executable(exp3_satr exp3_satr.c)
+  target_link_libraries(exp3_satr argos3plugin_simulator_kilolib)
+
+  #
+  # Lab 19 : copie exp2 + collision
+  #
+  add_executable(collision collision.c)
+  target_link_libraries(collision argos3plugin_simulator_kilolib)
+  add_executable(collision_star collision_star.c)
+  target_link_libraries(collision_star argos3plugin_simulator_kilolib)
+
+  #
+  # Lab 20 : Coordiantes
+  #
+  add_executable(coordinates_v1 coordinates_v1.c)
+  target_link_libraries(coordinates_v1 argos3plugin_simulator_kilolib)
 
 
 endif(ARGOS_BUILD_FOR_SIMULATOR)

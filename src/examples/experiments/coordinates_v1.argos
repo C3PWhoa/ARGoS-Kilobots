@@ -1,5 +1,4 @@
 <?xml version="1.0" ?>
-
 <argos-configuration>
 
   <!-- ************************* -->
@@ -9,8 +8,12 @@
     <system threads="0" />
     <experiment length="0"
                 ticks_per_second="31"
-                random_seed="124" />
+                random_seed="2" /> <!--760035, 11111 2x origin-->
   </framework>
+<!-- *************** 760135 buggy seed-->
+
+
+<!-- ticks per sec - Number of ticks simulated per sec, other will be jumped -->
 
   <!-- *************** -->
   <!-- * Controllers * -->
@@ -23,37 +26,31 @@
         <kilobot_led implementation="default" />
         <kilobot_communication implementation="default" />
       </actuators>
-      <sensors>
-        <kilobot_communication implementation="default" medium="kilocomm" />
+       <sensors>
+        <kilobot_communication implementation="default" medium="kilocomm" show_rays="false" noise_std_dev="0"/>
       </sensors>
-      <params behavior="build/examples/behaviors/gradient_simple" />
+      <params behavior="build/examples/behaviors/coordinates_v1" />
     </kilobot_controller>
 
   </controllers>
 
-  <!-- ****************** -->
-  <!-- * Loop functions * -->
-  <!-- ****************** -->
-  <loop_functions library="build/examples/loop_functions/debug_loop_functions/libdebug_loop_functions"
-                  label="debug_loop_functions" />
-
   <!-- *********************** -->
   <!-- * Arena configuration * -->
   <!-- *********************** -->
-  <arena size="2, 2, 1" center="0,0,0.5">
-    <distribute>
-      <position method="grid"
-                center="0,0,0"
-                distances="0.07,0.07,0"
-                layout="4,4,1" />
-      <orientation method="constant" values="0,0,0" />
-      <entity quantity="16" max_trials="1">
-        <kilobot id="kb">
-          <controller config="kbc" />>
-        </kilobot>
-      </entity>
-    </distribute>
-  </arena>
+    <arena size="10, 10, 1" center="0,0,0.5">
+      <distribute>
+        <position method="grid"
+                  center="0,0,0"
+                  distances="0.07,0.07,0"
+                  layout="8,8,1" />
+        <orientation method="constant" values="0,0,0" />
+        <entity quantity="64" max_trials="100">
+          <kilobot id="kb">
+            <controller config="kbc" />>
+          </kilobot>
+        </entity>
+      </distribute>
+    </arena>
 
   <!-- ******************* -->
   <!-- * Physics engines * -->
@@ -66,7 +63,7 @@
   <!-- * Media * -->
   <!-- ********* -->
   <media>
-    <kilobot_communication id="kilocomm" />
+    <kilobot_communication id="kilocomm" ignore_conflicts="false"  message_drop_prob="0"/>
   </media>
 
   <!-- ****************** -->
@@ -74,9 +71,12 @@
   <!-- ****************** -->
   <visualization>
     <qt-opengl>
-      <camera>
-        <placement idx="0" position="-0.232498,0,0.267499" look_at="0.481645,0,-0.432501" lens_focal_length="20" />
-      </camera>
+<camera>
+  <placements>
+    <placement index="0" position="-0.4,0,1.5" look_at="0,0,0" up="0.819644,0.000210767,0.572873" lens_focal_length="87" />
+  </placements>
+</camera>
+
     </qt-opengl>
   </visualization>
 

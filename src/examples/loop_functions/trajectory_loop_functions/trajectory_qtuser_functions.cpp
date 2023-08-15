@@ -18,6 +18,7 @@ void CTrajectoryQTUserFunctions::DrawInWorld() {
        ++it) {
       DrawWaypoints(it->second);
    }
+
 }
 
 /****************************************/
