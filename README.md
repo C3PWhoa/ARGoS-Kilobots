@@ -15,6 +15,16 @@ All the additional labs (8 to 14) are functional, but improvements can be made.
 
 Make sure you have ARGoS >= 3.0.0-beta52 installed!
 
+To make these codes work, the 'kilobot' plugin has been modified.
+
+In kilobot_entity.cpp file :
+        // Original cCommAnchor - comment out the line to disable
+        SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.0, 0.0, KILOBOT_RAB_ELEVATION));
+
+        // Modified cCommAnchor - comment out the line to disable
+        SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.01, 0.0, KILOBOT_RAB_ELEVATION));
+
+
 Commands:
 ```shell
 mkdir build
