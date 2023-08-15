@@ -18,6 +18,7 @@ Make sure you have ARGoS >= 3.0.0-beta52 installed!
 To make these codes work, the 'kilobot' plugin has been modified.
 
 In kilobot_entity.cpp file :
+
         // Original cCommAnchor - comment out the line to disable
         SAnchor& cCommAnchor = m_pcEmbodiedEntity->AddAnchor("comm", CVector3(0.0, 0.0, KILOBOT_RAB_ELEVATION));
 
