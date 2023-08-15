@@ -253,6 +253,7 @@ argos3 -c src/examples/experiments/exp2.argos
        * Simplification of the method for calculating the number of robots present in the shape. This avoids errors.
        * The definition of the shape is important. The construction order must have a certain logic.
        * Collision management has been added.
+       * Improvement of certain parameters, particularly THRESHOLD.
        * 7 states : 
          * ORBIT_TOOCLOSE
          * ORBIT_FORWARD
