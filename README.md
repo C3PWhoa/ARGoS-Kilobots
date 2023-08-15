@@ -109,6 +109,11 @@ argos3 -c src/examples/experiments/big_form.argos
 argos3 -c src/examples/experiments/shape54.argos
 ```
 
+## Lab 15
+```shell
+argos3 -c src/examples/experiments/exp2.argos
+```
+
 # Differences between Kilombo and ARGoS
 
 ## Kilombo
@@ -236,8 +241,38 @@ argos3 -c src/examples/experiments/shape54.argos
          * MOVE_TO_LIGHT
          * WAIT_TOGO
 
+## Lab 15 : Regular shapes - 25/62 kilobots
+     * Goal: Stop 54 robots when it reaches the desired relative position With the assignment of a new identifier. 
+     * The arrival order of the robots is no longer relevant.
+     * The robots approach the origin of the shape through the phenomenon of phototaxis.
+       * Concept of minimum distance.
+       * Declaration of a distance array
+       * Assignment of a new identifier.
+       * Groups of 2 robots form to move towards the shape.
+       * Each group starts within a predefined time interval in the 'wait_togo()' function.
+       * Simplification of the method for calculating the number of robots present in the shape. This avoids errors.
+       * The definition of the shape is important. The construction order must have a certain logic.
+       * Collision management has been added.
+       * 7 states : 
+         * ORBIT_TOOCLOSE
+         * ORBIT_FORWARD
+         * ORBIT_NORMAL
+         * ORBIT_STOP
+         * MOVE_TO_LIGHT
+         * WAIT_TOGO
+         * WAIT_COLLISION
 
 According to the authors' requests, I am obliged to mention that: 
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
 THE SOFTWARE ARGoS3 (https://github.com/ilpincy/argos3) IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
