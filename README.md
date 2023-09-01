@@ -209,6 +209,7 @@ argos3 -c src/examples/experiments/exp2.argos
        * Concept of minimum distance.
        * Declaration of a distance array
        * Assignment of a new identifier.
+       * Loop_function to mark the trajectory of the kilobots.
        * 5 states : 
          * ORBIT_TOOCLOSE
          * ORBIT_FORWARD
@@ -224,6 +225,7 @@ argos3 -c src/examples/experiments/exp2.argos
        * Declaration of a distance array
        * Assignment of a new identifier.
        * Divides the group of robots into two to avoid congestion.
+       * Loop_function to mark the trajectory of the kilobots.
        * Simplification of the method for calculating the number of robots present in the shape. This avoids errors.
        * 6 states : 
          * ORBIT_TOOCLOSE
@@ -243,6 +245,7 @@ argos3 -c src/examples/experiments/exp2.argos
        * Divides the group of robots into 7 to avoid congestion.
        * Each group starts within a predefined time interval in the 'wait_togo()' function.
        * Simplification of the method for calculating the number of robots present in the shape. This avoids errors.
+       * Loop_function to mark the trajectory of the kilobots.
        * The definition of the shape is important. The construction order must have a certain logic.
        * 6 states : 
          * ORBIT_TOOCLOSE
@@ -273,6 +276,20 @@ argos3 -c src/examples/experiments/exp2.argos
          * MOVE_TO_LIGHT
          * WAIT_TOGO
          * WAIT_COLLISION
+
+    * This experiment compares the swarm's performance based on the order of formation of kilobots in different shapes. 
+    * The "Shapes for exp2" file contains knowledge tables allowing the swarm to either form a square in two different 
+    *   formation orders, two triangles, or two letter 'U' shapes. The results obtained vary depending 
+    *   on the chosen order.
+
+    * In the creation of the letter 'U', we observe that the definition of the order is significant. Collisions are 
+    *   potentially more frequent in the U1 formation. The U2 formation yields better results. From this, I conclude 
+    *   that defining the shape before the experiment is crucial and should be considered based on the user's 
+    *   requirements.
+
+
+    * This experiment can be improved by increasing the number of robots approaching the shape and decreasing 
+    *   the latency between the departure of each group. This would result in reduced formation times.
 
 According to the authors' requests, I am obliged to mention that: 
 
