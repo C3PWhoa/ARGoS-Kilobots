@@ -29,6 +29,7 @@ typedef enum {
     ORBIT_STOP,
     MOVE_LIGHT,
     WAIT_TOGO,
+    COLLISION,
     WAIT_COLLISION,
 } orbit_state_t;
 
@@ -61,10 +62,9 @@ orbit_state_t state = ORBIT_FORWARD;
 orbit_state_t states[NB_BOT];
 
 
-/**
- * The second 'U' formation.
- * [new_id]:{n1, d1, n2, d2} where 0 < ni < N_BOT and 'd^i' equal's distance between this and n^i
- */
+
+//[new_id]:{n1, d1, n2, d2} where 0 < ni < N_BOT and 'di' equal's distance between this and ni
+
 int forme[NB_BOT][4]={
         {1,65,2,65},
         {0,65,2,92},
@@ -74,62 +74,61 @@ int forme[NB_BOT][4]={
         {3,65,4,65},
         {4,65,5,92},
         {6,65,5,65},
-        {6,65,7,92},
-        {8,65,7,65},
-        {8,65,9,92},
-        {10,65,9,65},
-        {10,65,11,92},
-        {12,65,11,65},
-        {12,65,13,92},
-        {14,65,13,65},
-        {14,65,15,92},
-        {16,65,15,65},
-        {16,65,17,92},
         {1,65,3,92},
-        {19,65,3,65},
-        {20,65,5,65},
-        {21,65,7,65},
-        {22,65,9,65},
-        {23,65,11,65},
-        {24,65,13,65},
-        {25,65,15,65},
-        {26,65,17,65},
-        {17,65,18,65},
-        {25,65,26,92},
-        {29,65,26,65},
-        {30,65,27,65},
-        {27,65,28,65},
-        {29,65,30,92},
-        {33,65,30,65},
-        {34,65,31,65},
-        {31,65,32,65},
-        {33,65,34,92},
-        {37,65,34,65},
-        {38,65,35,65},
-        {35,65,36,65},
+        {8,65,3,65},
+        {9,65,5,65},
+        {10,65,7,65},
+        {8,65,9,92},
+        {12,65,9,65},
+        {13,65,10,65},
+        {14,65,11,65},
+        {12,65,13,92},
+        {16,65,13,65},
+        {17,65,14,65},
+        {18,65,15,65},
+        {16,65,17,92},
+        {20,65,17,65},
+        {21,65,18,65},
+        {22,65,19,65},
+        {20,65,21,92},
+        {24,65,21,65},
+        {25,65,22,65},
+        {26,65,23,65},
+        {6,65,7,92},
+        {28,65,7,65},
+        {29,65,11,65},
+        {30,65,29,92},
+        {31,65,29,65},
+        {32,65,28,65},
+        {31,65,32,92},
+        {34,65,32,65},
+        {35,65,33,65},
+        {34,65,35,92},
+        {37,65,35,65},
+        {38,65,36,65},
         {37,65,38,92},
-        {41,65,38,65},
-        {42,65,39,65},
-        {39,65,40,65},
-        {43,65,44,65},
-        {19,65,20,92},
-        {46,65,20,65},
-        {47,65,21,65},
+        {40,65,38,65},
+        {41,65,39,65},
+        {40,65,41,92},
+        {43,65,41,65},
+        {44,65,42,65},
+        {34,65,31,92},
+        {46,65,37,65},
+        {47,65,40,65},
+        {48,65,43,65},
         {46,65,47,92},
-        {49,65,47,65},
-        {50,65,48,65},
-        {48,65,22,65},
-        {49,65,50,92},
-        {50,65,53,65},
+        {50,65,47,65},
+        {51,65,48,65},
+        {52,65,49,65},
+        {50,65,51,92},
         {54,65,51,65},
-        {51,65,52,65},
-        {53,65,54,92},
-        {57,65,54,65},
+        {55,65,52,65},
+        {56,65,53,65},
+        {54,65,55,92},
         {58,65,55,65},
-        {55,65,56,65},
-        {60,65,59,65},
+        {59,65,56,65},
+        {60,65,57,65},
 };
-
 
 /******************************************************************************************/
 /******************                          Function signature          ******************/
@@ -152,7 +151,9 @@ void orbit_stop();
 
 void wait_togo();
 
-void wait_collision(int fstate);
+void collision(int fstate);
+
+void wait_collision();
 
 
 
@@ -328,19 +329,26 @@ void wait_togo() {
     }
 }
 
-/**
- * Collision management
- * @param fstate The state to which the robot will return after collision management.
- */
-void wait_collision(int fstate) {
 
-    // Stop the robot for 100 ticks, otherwise it returns to its previous state.
+void collision(int fstate) {
+    //printf("%d collision\n", kilo_uid);
+    //printf("Collision : kilo_ticks = %d, last_ticks = %d\n", kilo_ticks, last_ticks_update);
+    //printf("coll : %d change d'état -> WAIT_COLLISION\n", kilo_uid);
+    states[kilo_uid] = WAIT_COLLISION;
+
+}
+
+void wait_collision() {
+
+    //printf("%d wait_collison\n", kilo_uid);
+
     if (kilo_ticks < (last_ticks_update + 100)) {
         set_motion(STOP);
         states[kilo_uid] = WAIT_COLLISION;
     } else {
         last_ticks_update = kilo_ticks;
-        states[kilo_uid] = fstate;
+        //printf("%d retourne en movelight. kt = %d, last_update = %d\n ", kilo_uid, kilo_ticks, last_ticks_update);
+        states[kilo_uid] = MOVE_LIGHT;
     }
 }
 
@@ -367,7 +375,8 @@ void move_to_light() {
     //  the received message comes from a robot heading towards the light or from a robot in orbit.
     if (received_state == MOVE_LIGHT || received_state == ORBIT_NORMAL) {
         if (kilo_uid > speaker_id) {
-            states[kilo_uid] = WAIT_COLLISION;
+            //printf("%d change d'état -> COLLISION\n",kilo_uid);
+            states[kilo_uid] = COLLISION;
         }
     }
 
@@ -533,8 +542,11 @@ void loop() {
             case WAIT_TOGO:
                 wait_togo();
                 break;
+            case COLLISION:
+                collision(states[kilo_uid]);
+                break;
             case WAIT_COLLISION:
-                wait_collision(states[kilo_uid]);
+                wait_collision();
                 break;
             default:
                 break;

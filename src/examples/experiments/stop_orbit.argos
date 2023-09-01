@@ -52,12 +52,12 @@
     </kilobot>
 
     <kilobot id="kb1">
-      <body position="0.07,0,0" orientation="0,0,0" />
+      <body position="0.065,0,0" orientation="0,0,0" />
       <controller config="star" />>
     </kilobot>
 
     <kilobot id="kb2">
-      <body position="0,0.07,0" orientation="0,0,0" />
+      <body position="0,0.065,0" orientation="0,0,0" />
       <controller config="star" />>
     </kilobot>
 

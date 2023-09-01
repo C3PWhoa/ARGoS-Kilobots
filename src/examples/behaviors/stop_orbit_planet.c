@@ -17,9 +17,9 @@
 
 // Constants for orbit control.
 #define TOO_CLOSE_DISTANCE 60
-#define DESIRED_DISTANCE 70
+#define DESIRED_DISTANCE 65
 // Constant for a tolerance threshold
-#define THRESHOLD 5
+#define THRESHOLD 2.5
 
 static const uint8_t NB_BOT = 4;
 
@@ -44,10 +44,10 @@ int range_dist[NB_BOT];
  * Exemple : kb[0] se trouve à 70mm de kb[1] et 70mm de kb[2]. Kb[1] se trouve à 70mm de kb[0] et 99mm de kb[2]
  */
 int form[NB_BOT][4] = {
-        {1, 70, 2, 70},
-        {0, 70, 2, 99},
-        {0, 70, 1, 99},
-        {1, 70, 2, 70}
+        {1, 65, 2, 65},
+        {0, 65, 2, 92},
+        {0, 65, 1, 92},
+        {1, 65, 2, 65}
 };
 
 /**

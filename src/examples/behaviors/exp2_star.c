@@ -59,7 +59,7 @@ void setup() {
 void loop() {
     // Blink LED magenta whenever a message is sent.
 
-    if (nb_bot_form == 25) {
+    if (nb_bot_form == 62) {
         i++;
         last_ticks = kilo_ticks;
         if (i == 1) {
