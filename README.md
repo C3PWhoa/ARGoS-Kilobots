@@ -125,6 +125,11 @@ argos3 -c src/examples/experiments/shape54.argos
 argos3 -c src/examples/experiments/exp2.argos
 ```
 
+## Lab 16 by Michal Pluhacek
+```shell
+argos3 -c src/examples/experiments/coordinates_v1.argos
+```
+
 # Differences between Kilombo and ARGoS
 
 ## Kilombo
@@ -291,7 +296,16 @@ argos3 -c src/examples/experiments/exp2.argos
     * This experiment can be improved by increasing the number of robots approaching the shape and decreasing 
     *   the latency between the departure of each group. This would result in reduced formation times.
 
-According to the authors' requests, I am obliged to mention that: 
+## Lab 16 by Michal Pluhacek
+    * Decentralized global coordinate system construction for kilobots
+    * Example application: displaying message
+    * Displayed Message: Hello World (for 100 robots in 10x10 formation)
+
+    * code (c) by Michal Pluhacek
+    * Version date: February 3rd, 2023
+
+    * Paper citation: to be added
+    * According to the authors' requests, I am obliged to mention that: 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
