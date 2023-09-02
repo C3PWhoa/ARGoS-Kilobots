@@ -70,14 +70,22 @@
   <!-- * Visualization * -->
   <!-- ****************** -->
   <visualization>
-    <qt-opengl>
-<camera>
-  <placements>
-    <placement index="0" position="-0.4,0,1.5" look_at="0,0,0" up="0.819644,0.000210767,0.572873" lens_focal_length="87" />
-  </placements>
-</camera>
-
-    </qt-opengl>
-  </visualization>
+          <qt-opengl>
+            <camera>
+             <placements>
+              <placement index="3" position="0,0,2" look_at="0,0,0" up="4,0,0" lens_focal_length="20" />
+              <placement index="1" position="0,0,2" look_at="0,0,0" up="2,0,0" lens_focal_length="30" />
+              <placement index="2" position="-2.5,0,2" look_at="0,0,0" up="1,0,0" lens_focal_length="10" />
+              <placement index="0" position="-2.5,0,2" look_at="0,0,0" up="1,0,0" lens_focal_length="50" />
+              <placement index="4" position="-2,-2,2" look_at="0,0,0" up="1,1,0" lens_focal_length="50" />
+              <placement index="5" position="-3,-3,2" look_at="0,0,0" up="1,1,0" lens_focal_length="90" />
+              <placement index="6" position="5,0,3" look_at="0.5,0,0" up="-1,0,0" lens_focal_length="50" />
+              <placement index="7" position="5,0,5" look_at="-1.5,0,0" up="-1,0,0" lens_focal_length="50" />
+              <placement index="8" position="0,3,2" look_at="-0,-2,0" up="0,-0.5,0" lens_focal_length="20" />
+              <placement index="9" position="2,2,2" look_at="0,0,0" up="-1,-1,0" lens_focal_length="20" />
+             </placements>
+            </camera>
+          </qt-opengl>
+        </visualization>
 
 </argos-configuration>
